@@ -19,7 +19,7 @@ angular.module('app', ['ui.router'])
     controller: 'twitchCtrl'
   })
   .state('twitchuser', {
-    url: '/twitchkeeper/u/:name',
+    url: '/twitchkeeper/u/:id',
     templateUrl: './views/twitchUser.html',
     controller: 'twitchUserCtrl'
   })

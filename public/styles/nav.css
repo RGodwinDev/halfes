@@ -1,0 +1,11 @@
+button {
+  margin-left: 5px;
+  margin-top: 2px;
+  padding: 2px;
+}
+
+.navbod {
+  width: 100%;
+  height: 50px;
+  background-color: #5e5d5d;
+}

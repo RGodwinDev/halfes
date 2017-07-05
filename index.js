@@ -8,6 +8,7 @@ const session = require('express-session');
 const config = require('./server/config');
 const passport = require('passport');
 const { Strategy } = require('passport-twitch');
+const axios = require('axios');
 
 //start app
 const app = express();
@@ -42,6 +43,8 @@ passport.use(new Strategy(config.Strategy, function(accessToken, refreshToken, p
 
 }));
 
+
+//worry about this stuff later, if theres time
 //if the person goes to this route, authenticate
 app.get('/auth/twitch', passport.authenticate('twitch', {forceVerify: true}));
 app.get('/auth/twitch/callback', passport.authenticate('twitch', {
@@ -50,6 +53,31 @@ app.get('/auth/twitch/callback', passport.authenticate('twitch', {
   //if authentication failed for one reason or another.
   failureRedirect: '/auth/twitch'
 }));
+
+//cant do this as backend isnt in angular, just js?
+//answer: use axios, its pretty much the same as $http
+app.get('/api/getStreamers', function(req, res){
+  //make it so this request happens every 5 minutes, and we get this data from the database
+  axios({
+    method: 'GET',
+    url: 'https://api.twitch.tv/kraken/streams/',
+    headers: {'Client-ID':'7xganf8cmv116235dcf9vcun4lcqvb'},
+  }).then(function(response){
+    res.send(response.data);
+  })
+});
+app.get('/api/getChannel/:id', function(req, res){
+  console.log('inside getChannel, serverside')
+  axios({
+    method: 'GET',
+    //need to make it so that it gets channel, based on the id
+    url: 'https://api.twitch.tv/kraken/channels/'+id,
+    headers: {'Client-ID':'7xganf8cmv116235dcf9vcun4lcqvb'},
+  }).then(function(response){
+    console.log('inside of getChannel.then')
+    res.send(response.data);
+  })
+});
 
 passport.serializeUser(function(user, cb){
   cb(null, user);

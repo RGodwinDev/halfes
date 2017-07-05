@@ -1,0 +1,14 @@
+.channel-box {
+  margin: 5px;
+  padding: 10px;
+}
+.channel-name {
+  color: blue;
+}
+.channel-viewers {
+  color: red;
+}
+
+.img {
+  height: 100px;
+}
