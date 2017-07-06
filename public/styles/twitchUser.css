@@ -1,6 +1,13 @@
-.twitchstreambox {
-  background-color: red;
-  padding: 20px;
-  width: 600px;
-  height: 400px;
+.streamandchat {
+ display: flex;
+ flex-direction: row;
+}
+#stream_embed {
+  height: 50vw;
+  width: 70vw;
+}
+
+#chat_embed {
+ height: 50vw;
+ width: 30vw;
 }

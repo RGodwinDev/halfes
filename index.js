@@ -61,23 +61,40 @@ app.get('/api/getStreamers', function(req, res){
   axios({
     method: 'GET',
     url: 'https://api.twitch.tv/kraken/streams/',
-    headers: {'Client-ID':'7xganf8cmv116235dcf9vcun4lcqvb'},
+    headers: {'Client-ID':config.Strategy.clientID},
   }).then(function(response){
     res.send(response.data);
   })
 });
 app.get('/api/getChannel/:id', function(req, res){
-  console.log('inside getChannel, serverside')
+  var urlOut = 'https://api.twitch.tv/kraken/channels/' + req.params.id;
   axios({
     method: 'GET',
-    //need to make it so that it gets channel, based on the id
-    url: 'https://api.twitch.tv/kraken/channels/'+id,
-    headers: {'Client-ID':'7xganf8cmv116235dcf9vcun4lcqvb'},
+    url: urlOut, //urlOut is above url based on parameter
+    headers: {'Client-ID': config.Strategy.clientID,
+  'Accept': 'application/vnd.twitchtv.v5+json'},
   }).then(function(response){
-    console.log('inside of getChannel.then')
+    console.log('watching - '+ response.data.display_name);
     res.send(response.data);
   })
 });
+
+app.get('/api/getUser/:name', function(req, res){
+  console.log(req.params.name);
+  var urlOut = 'https://api.twitch.tv/kraken/users/?login=' + req.params.name;
+  axios({
+    method: 'GET',
+    url: urlOut, //urlOut is above url based on parameter
+    headers: {'Client-ID': config.Strategy.clientID,
+  'Accept': 'application/vnd.twitchtv.v5+json'},
+  }).then(function(response){
+    
+    res.send(response.data.users[0]);
+  }).catch(function(err){
+    console.log(err);
+  })
+});
+
 
 passport.serializeUser(function(user, cb){
   cb(null, user);

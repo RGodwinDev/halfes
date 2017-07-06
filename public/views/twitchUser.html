@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="./styles/twitchUser.css"></link>
 
+
+<div class="streamandchat">
 <div class="twitchstreambox">
-  <!-- need to get channel from url somehow-->
-  <!-- get info about channel, and put onto scope in twitchuser controller
-  twitchuserserv.getStream($stateParams.name)-->
   <iframe
-    src="http://player.twitch.tv/?channel=RiotGames"
+    id="stream_embed"
+    ng-src="{{channelSource}}"
     height="400px";
     width="600px";
     scrolling="false"
@@ -13,3 +13,13 @@
     autoplay="true">
   </iframe>
 </div>
+<div class="chatbox">
+<iframe frameborder="0"
+        scrolling="no"
+        id="chat_embed"
+        ng-src="{{chatSource}}"
+        height="500"
+        width="350">
+</iframe>
+<div class="chatbox">
+</div> <!-- end of streamandchat box -->

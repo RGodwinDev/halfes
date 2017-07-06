@@ -4,5 +4,8 @@ angular.module('app')
   this.getStreamers = function(){
     return $http.get('/api/getStreamers')
   }
-  
+  this.searchUser = function(name){
+    console.log(name +' in service');
+    return $http.get('/api/getUser/' + name)
+  }
 })
