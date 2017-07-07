@@ -11,3 +11,21 @@
  height: 50vw;
  width: 30vw;
 }
+
+.abovestreamBox {
+  height: 40px;
+  background-color: #383838;
+  color: gold;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+}
+
+.name {
+  padding: 3px;
+  margin-left: 10px;
+}
+
+.logo {
+  height: 40px;
+}

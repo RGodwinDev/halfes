@@ -6,7 +6,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
     $scope.channels = response.data.streams
     //console.log($scope.channels);
   });
-
+  $scope.test='The streams update every 5 minutes'
   //clicking search button gets the user from the input text
   //then goes to user view with the id from the data.
   $scope.buttonClick = function(){
@@ -14,13 +14,14 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
     userPromise.then(function(response){
       console.log(response);
       //if status is good
-      if(response.status === 200){
+      if(response.data.stat === 200){
         //goto user view with id
-        console.log(response.data._id);
-        let path = '/twitchkeeper/u/'+ response.data._id;
+        console.log(response.data.userinfo._id);
+        let path = '/twitchkeeper/u/'+ response.data.userinfo._id;
         $location.path(path);
       }
       //else, not good response status
+      $scope.test = response.data.failmode;
     });
   }
 });

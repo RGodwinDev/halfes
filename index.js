@@ -6,9 +6,10 @@ const port = 3000;
 const massive = require('massive');
 const session = require('express-session');
 const config = require('./server/config');
-const passport = require('passport');
-const { Strategy } = require('passport-twitch');
-const axios = require('axios');
+// const passport = require('passport');
+// const { Strategy } = require('passport-twitch');
+// const axios = require('axios'); //required in the route file
+const masterRoutes = require('./server/masterRoutes');
 
 //start app
 const app = express();
@@ -22,86 +23,48 @@ app.use(session(config.session));
 //when someone comes to the website, it gives them the frontend from /public
 app.use('/', express.static(__dirname + '/public'));
 
-massive(config.postgres).then(dbInstance => {
-  app.set('db', dbInstance);
-  //do stuff with db here?
-});
+// massive(config.postgres).then(dbInstance => {
+//   app.set('db', dbInstance);
+//   //do stuff with db here?
+// });
+
+masterRoutes(app);
+
 
 //passport just piggybacks off the express session and modifies it to be usable for authorizing users
 //initialize passport
-app.use(passport.initialize());
-//makes the user object into a true deserialzed user object
-app.use(passport.session());
+// app.use(passport.initialize());
+// //makes the user object into a true deserialzed user object
+// app.use(passport.session());
 
-//give the passport a strategy
-passport.use(new Strategy(config.Strategy, function(accessToken, refreshToken, profile, cb){
-  //not sure what these do, should research them.
-  console.log(profile);
-  profile.id = 1;
-  app.set('user', profile);
-  return cb(null, profile);
-
-}));
-
+// //give the passport a strategy
+// passport.use(new Strategy(config.Strategy, function(accessToken, refreshToken, profile, cb){
+//   //not sure what these do, should research them.
+//   console.log(profile);
+//   profile.id = 1;
+//   app.set('user', profile);
+//   return cb(null, profile);
+//
+// }));
+//
 
 //worry about this stuff later, if theres time
-//if the person goes to this route, authenticate
-app.get('/auth/twitch', passport.authenticate('twitch', {forceVerify: true}));
-app.get('/auth/twitch/callback', passport.authenticate('twitch', {
-  //if authenticated, go home
-  successRedirect: '/',
-  //if authentication failed for one reason or another.
-  failureRedirect: '/auth/twitch'
-}));
-
-//cant do this as backend isnt in angular, just js?
-//answer: use axios, its pretty much the same as $http
-app.get('/api/getStreamers', function(req, res){
-  //make it so this request happens every 5 minutes, and we get this data from the database
-  axios({
-    method: 'GET',
-    url: 'https://api.twitch.tv/kraken/streams/',
-    headers: {'Client-ID':config.Strategy.clientID},
-  }).then(function(response){
-    res.send(response.data);
-  })
-});
-app.get('/api/getChannel/:id', function(req, res){
-  var urlOut = 'https://api.twitch.tv/kraken/channels/' + req.params.id;
-  axios({
-    method: 'GET',
-    url: urlOut, //urlOut is above url based on parameter
-    headers: {'Client-ID': config.Strategy.clientID,
-  'Accept': 'application/vnd.twitchtv.v5+json'},
-  }).then(function(response){
-    console.log('watching - '+ response.data.display_name);
-    res.send(response.data);
-  })
-});
-
-app.get('/api/getUser/:name', function(req, res){
-  console.log(req.params.name);
-  var urlOut = 'https://api.twitch.tv/kraken/users/?login=' + req.params.name;
-  axios({
-    method: 'GET',
-    url: urlOut, //urlOut is above url based on parameter
-    headers: {'Client-ID': config.Strategy.clientID,
-  'Accept': 'application/vnd.twitchtv.v5+json'},
-  }).then(function(response){
-    
-    res.send(response.data.users[0]);
-  }).catch(function(err){
-    console.log(err);
-  })
-});
+// //if the person goes to this route, authenticate
+// app.get('/auth/twitch', passport.authenticate('twitch', {forceVerify: true}));
+// app.get('/auth/twitch/callback', passport.authenticate('twitch', {
+//   //if authenticated, go home
+//   successRedirect: '/',
+//   //if authentication failed for one reason or another.
+//   failureRedirect: '/auth/twitch'
+// }));
 
 
-passport.serializeUser(function(user, cb){
-  cb(null, user);
-});
-passport.deserializeUser(function(obj, cb){
-  cb(null, obj);
-});
+// passport.serializeUser(function(user, cb){
+//   cb(null, user);
+// });
+// passport.deserializeUser(function(obj, cb){
+//   cb(null, obj);
+// });
 
 //listening..... on the port
 app.listen(port, function(){
