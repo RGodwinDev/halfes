@@ -3,4 +3,6 @@ express
 cors
 body-parser
 massive
-express-session
+axios
+
+and also a config.js in the server folder
