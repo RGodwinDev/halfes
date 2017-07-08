@@ -48,7 +48,8 @@ module.exports = function(app){
       }
     }).catch(function(err){
       console.log(err + " This is an error!!!");
-
+      res.send({failmode: 'invalid',
+      stat: 400});
     })
   });
 }

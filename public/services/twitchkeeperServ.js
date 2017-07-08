@@ -5,7 +5,8 @@ angular.module('app')
     return $http.get('/api/getStreamers')
   }
   this.searchUser = function(name){
-    console.log(name +' in service');
+    //this kills any spaces in the name
+    name = name.split(' ').join('');
     return $http.get('/api/getUser/' + name)
   }
 })

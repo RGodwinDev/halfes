@@ -18,3 +18,9 @@ select user_id, age(end_time, start_time) as duration from stream_times;
 
 --creates stream_times table
 create table stream_times (id serial primary key, user_id integer, start timestamp, end timestamp);
+
+
+
+--insert a new user into users table
+insert into users values(userid, name, displayname, logo, game, tracking)
+--find out how to put in variables

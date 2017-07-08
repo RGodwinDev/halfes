@@ -4,7 +4,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
 
   promise.then(function(response){
     $scope.channels = response.data.streams
-    //console.log($scope.channels);
+    console.log($scope.channels);
   });
   $scope.test='The streams update every 5 minutes'
   //clicking search button gets the user from the input text
@@ -16,7 +16,6 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
       //if status is good
       if(response.data.stat === 200){
         //goto user view with id
-        console.log(response.data.userinfo._id);
         let path = '/twitchkeeper/u/'+ response.data.userinfo._id;
         $location.path(path);
       }

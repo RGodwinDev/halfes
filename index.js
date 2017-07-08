@@ -23,10 +23,16 @@ app.use(session(config.session));
 //when someone comes to the website, it gives them the frontend from /public
 app.use('/', express.static(__dirname + '/public'));
 
-// massive(config.postgres).then(dbInstance => {
-//   app.set('db', dbInstance);
-//   //do stuff with db here?
-// });
+massive(config.postgres)
+.then(dbInstance => {
+  app.set('db', dbInstance);
+  let list25 = dbInstance.insert25list();
+  list25.then(function(result){
+    console.log(result);
+   });
+
+  //do stuff with db here?
+});
 
 masterRoutes(app);
 
