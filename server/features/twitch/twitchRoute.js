@@ -5,13 +5,17 @@ module.exports = function(app){
   //cant do this as backend isnt in angular, just js?
   //answer: use axios, its pretty much the same as $http
   app.get('/api/getStreamers', function(req, res){
-    //make it so this request happens every 5 minutes, and we get this data from the database
-    axios({
-      method: 'GET',
-      url: 'https://api.twitch.tv/kraken/streams/',
-      headers: {'Client-ID':config.Strategy.clientID},
-    }).then(function(response){
-      res.send(response.data);
+    //i need to get the dbInstance here somehow
+    const db = app.get('db');
+    let get25Promise = db.get25list();
+    get25Promise.then(function(result){
+      //result is array of userIds
+      //get users from database with the ids
+      //let get25UsersPromise = db.get25Users(result);
+      // get25UsersPromise.then(function(resultUsers){
+      //   res.send(resultUsers);
+      // })
+      res.send(result);
     })
   });
   app.get('/api/getChannel/:id', function(req, res){
@@ -24,6 +28,9 @@ module.exports = function(app){
     }).then(function(response){
       console.log('watching - '+ response.data.display_name);
       res.send(response.data);
+    }).catch(function(response){
+      console.log('getchannel failed')
+      console.log(response);
     })
   });
 

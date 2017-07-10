@@ -8,7 +8,7 @@ const session = require('express-session');
 const config = require('./server/config');
 // const passport = require('passport');
 // const { Strategy } = require('passport-twitch');
-// const axios = require('axios'); //required in the route file
+const axios = require('axios'); //required in the route file
 const masterRoutes = require('./server/masterRoutes');
 
 //start app
@@ -23,16 +23,46 @@ app.use(session(config.session));
 //when someone comes to the website, it gives them the frontend from /public
 app.use('/', express.static(__dirname + '/public'));
 
-massive(config.postgres)
-.then(dbInstance => {
+massive(config.postgres).then(dbInstance => {
   app.set('db', dbInstance);
-  let list25 = dbInstance.insert25list();
-  list25.then(function(result){
-    console.log(result);
-   });
+  //get top 25 streamers, put them into database, make top25 list
+  const getNew25List = function(){
+    let promise25 = axios({
+      method: 'GET',
+      url: 'https://api.twitch.tv/kraken/streams/',
+      headers: {'Client-ID':config.Strategy.clientID},
+    }).then(function(response){
+      //go through data, get the ids
+      console.log(response.data.streams)
+      let idArr = [];
+      for(let i = 0; i < response.data.streams.length; ++i){
+        idArr.push(response.data.streams[i].channel._id)
+        //should also check if user exists in db or not, and insert their data if they dont.
+        //i'll need to do async calls to do this
+      }
+      //put the array of ids into the database
+      let list25 = dbInstance.insert25list(idArr);
+      list25.then(function(result){
+        //result is the array of objects in the form
+        //[{userId: #}, {userId: #}, etc...] 25 user ids
+        console.log(new Date() + ' new top 25 list');
+        console.log(result);
+      });
+    }) //end of promise25.then
+  } //end of getNew25List
+    //do stuff other than promise25 with db here
+  //run it once
+  getNew25List();
+  //run it every 5 minutes
+  const minutes = 5;
+  const interval = minutes * 60 * 1000;
+  setInterval(function(){
+    getNew25List();
+  }, interval);
+}); //end of massive function
 
-  //do stuff with db here?
-});
+
+
 
 masterRoutes(app);
 
@@ -75,4 +105,4 @@ masterRoutes(app);
 //listening..... on the port
 app.listen(port, function(){
   console.log('listening on port ' + port)
-})
+});

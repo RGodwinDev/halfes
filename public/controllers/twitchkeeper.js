@@ -3,7 +3,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   let promise = twitchkeeperServ.getStreamers();
 
   promise.then(function(response){
-    $scope.channels = response.data.streams
+    $scope.channels = response.data
     console.log($scope.channels);
   });
   $scope.test='The streams update every 5 minutes'
