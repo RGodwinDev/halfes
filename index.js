@@ -33,12 +33,35 @@ massive(config.postgres).then(dbInstance => {
       headers: {'Client-ID':config.Strategy.clientID},
     }).then(function(response){
       //go through data, get the ids
-      console.log(response.data.streams)
+      // console.log(response.data.streams)
       let idArr = [];
       for(let i = 0; i < response.data.streams.length; ++i){
         idArr.push(response.data.streams[i].channel._id)
+
         //should also check if user exists in db or not, and insert their data if they dont.
-        //i'll need to do async calls to do this
+        let userArr = [];
+        userArr.push(response.data.streams[i].channel._id);
+        userArr.push(response.data.streams[i].channel.name);
+        userArr.push(response.data.streams[i].channel.display_name);
+        userArr.push(response.data.streams[i].channel.logo);
+        userArr.push(response.data.streams[i].channel.game);
+        //default tracking status, true
+        userArr.push(true);
+        // console.log(userArr);
+        userArr.push(response.data.streams[i].viewers)
+
+        let userPromise = dbInstance.getUser(userArr[0]);
+
+        userPromise.then(function(userRes){
+          if(userRes.length > 0){ //if the user exists, update it with the userArr data
+            dbInstance.updateUser(userArr);
+          }
+          else { //if the user doesn't exist, create a new one
+           dbInstance.insertNewUserViewers(userArr);
+           console.log('creating new user');
+          }
+        })
+
       }
       //put the array of ids into the database
       let list25 = dbInstance.insert25list(idArr);
@@ -46,7 +69,7 @@ massive(config.postgres).then(dbInstance => {
         //result is the array of objects in the form
         //[{userId: #}, {userId: #}, etc...] 25 user ids
         console.log(new Date() + ' new top 25 list');
-        console.log(result);
+        // console.log(result);
       });
     }) //end of promise25.then
   } //end of getNew25List

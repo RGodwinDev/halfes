@@ -6,8 +6,8 @@
 <span>{{test}}</span>
 <div class='channels-box' ng-repeat="channel in channels">
   <div class="channel-box">
-    <div class="channel-name" ui-sref='twitchuser({id: channel.channel._id})'> {{channel.channel.display_name}} </div>
-    <div class="channel-pic"><img class=img src='{{channel.channel.logo}}'> </div>
+    <div class="channel-name" ui-sref='twitchuser({id: channel.userid})'> {{channel.display_name}} </div>
+    <div class="channel-pic"><img class=img src='{{channel.logo}}'> </div>
     <div class="channel-game"> {{channel.game}} </div>
     <div class="channel-viewers"> {{channel.viewers}} viewers</div>
   </div>

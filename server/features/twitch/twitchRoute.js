@@ -9,30 +9,62 @@ module.exports = function(app){
     const db = app.get('db');
     let get25Promise = db.get25list();
     get25Promise.then(function(result){
-      //result is array of userIds
+      //result is array of objects with userIds propertys
+      let idArr = [];
+      for(let i = 0; i < result.length; ++i){
+        idArr.push(result[i].userId);
+      }
       //get users from database with the ids
-      //let get25UsersPromise = db.get25Users(result);
-      // get25UsersPromise.then(function(resultUsers){
-      //   res.send(resultUsers);
-      // })
-      res.send(result);
+      let get25UsersPromise = db.get25Users(idArr);
+      get25UsersPromise.then(function(resultUsers){
+        res.send(resultUsers);
+      })
     })
-  });
+  }); //end of get /api/getStreamers
+
   app.get('/api/getChannel/:id', function(req, res){
-    var urlOut = 'https://api.twitch.tv/kraken/channels/' + req.params.id;
-    axios({
-      method: 'GET',
-      url: urlOut, //urlOut is above url based on parameter
-      headers: {'Client-ID': config.Strategy.clientID,
-    'Accept': 'application/vnd.twitchtv.v5+json'},
-    }).then(function(response){
-      console.log('watching - '+ response.data.display_name);
-      res.send(response.data);
-    }).catch(function(response){
-      console.log('getchannel failed')
-      console.log(response);
-    })
-  });
+    const db = app.get('db');
+    let getChannelPromise = db.getUser([req.params.id]);
+    getChannelPromise.then(function(userRes){
+      if(userRes.length > 0){ //user exists
+
+        console.log(userRes);
+        res.send(userRes);
+      }
+      else { //user doesn't exist, create one
+        const urlOut = 'https://api.twitch.tv/kraken/channels/' + req.params.id;
+        axios({
+          method: 'GET',
+          url: urlOut, //urlOut is above url based on parameter
+          headers: {'Client-ID': config.Strategy.clientID,
+          'Accept': 'application/vnd.twitchtv.v5+json'},
+        }).then(function(response){
+          console.log('watching - '+ response.data.display_name);
+          let uArr = [];
+          uArr.push(response.data._id);
+          uArr.push(response.data.name);
+          uArr.push(response.data.display_name);
+          uArr.push(response.data.logo);
+          uArr.push(response.data.game);
+          uArr.push(true);
+          let newUserPromise = db.insertNewUser(uArr);
+          newUserPromise.then(function(){
+            console.log('created new user');
+            let getNewUserPromise = db.getUser(uArr[0]);
+            getNewUserPromise.then(function(incoming){
+              console.log(incoming);
+              res.send(incoming);
+            })
+          }); //end of newUserPromise.then
+        }).catch(function(response){
+          console.log('getchannel failed')
+          console.log(response);
+        });//end of axios.catch
+      }//end of else
+    });//end of getChannelPromise.then
+  }); //end of get /api/getChannel/:id
+
+
 
   app.get('/api/getUser/:name', function(req, res){
     console.log(req.params.name);
