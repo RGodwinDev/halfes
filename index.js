@@ -82,6 +82,34 @@ massive(config.postgres).then(dbInstance => {
   setInterval(function(){
     getNew25List();
   }, interval);
+
+  const liveCheck = function(){
+    let promise = dbInstance.getTrackedUsers();
+    promise.then(function(response){
+      console.log(response);
+      while(response.length > 0){
+        //queryOut is inside while loop because it needs to reset each time.
+        let queryOut = "https://api.twitch.tv/kraken/streams/?limit=100&channel=";
+        for(let i = 0; i < 99 && response.length > 0; ++i){
+          let obj = response.shift();
+          queryOut += "," + obj.userid;
+        } //end for loop
+        axios({
+          method:'GET',
+          url:queryOut,
+          headers:{'Client-ID': config.Strategy.clientID,
+          'Accept': 'application/vnd.twitchtv.v5+json'},
+        }).then(function(queryResponse){ //queryResponse is the response from twitch, up to 99 streams, but probably less.
+          //queryResponse is an array of streams [stream, stream, stream, etc...]
+          for(let b = 0; b < queryResponse.data.streams.length; ++b){
+            // console.log(queryResponse.data.streams[b]);
+          }
+        });
+      }//end of while loop
+    })
+
+  }//end of liveCheck function
+  liveCheck();
 }); //end of massive function
 
 

@@ -27,8 +27,7 @@ module.exports = function(app){
     let getChannelPromise = db.getUser([req.params.id]);
     getChannelPromise.then(function(userRes){
       if(userRes.length > 0){ //user exists
-
-        console.log(userRes);
+        // console.log(userRes);
         res.send(userRes);
       }
       else { //user doesn't exist, create one
