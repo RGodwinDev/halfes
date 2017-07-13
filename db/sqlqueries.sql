@@ -16,8 +16,13 @@ group by date_part('hour', start_time);
 select user_id, age(end_time, start_time) as duration from stream_times;
 
 
---creates stream_times table
-create table stream_times (id serial primary key, user_id integer, start timestamp, end timestamp);
+--creates tables in db
+create table if not exists openstreams (userid text, start text, streamid bigint);
+
+create table if not exists closedstreams (userid bigint, starttime text, endtime text, streamid bigint);
+
+create table if not exists users (userid bigint, name text, display_name text, logo text, game text, tracking boolean, viewers bigint);
+
 
 
 
