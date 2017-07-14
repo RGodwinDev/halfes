@@ -12,7 +12,7 @@ module.exports = function(app){
       //result is array of objects with userIds propertys
       let idArr = [];
       for(let i = 0; i < result.length; ++i){
-        idArr.push(result[i].userId);
+        idArr.push(result[i].userid);
       }
       //get users from database with the ids
       let get25UsersPromise = db.get25Users(idArr);

@@ -1,5 +1,5 @@
 --kill previous table
-create table if not exists top25 (userId bigint);
+create table if not exists top25 (userid bigint);
 truncate table top25;
 --remake it
 --insert 25 rows, 1 for each top 25 user

@@ -166,6 +166,8 @@ massive(config.postgres).then(dbInstance => {
           let count = 0;
           //take leftover db streams out
           for(let s = 0; s < streamsres.length; ++s){
+            //need to move from open stream into close stream now
+
             dbInstance.closeStream(parseInt(streamsres[s].userid));
             ++count;
           }//end forloop

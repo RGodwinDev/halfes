@@ -7,5 +7,29 @@ button {
 .navbod {
   width: 100%;
   height: 50px;
-  background-color: #5e5d5d;
+  background-color: #24BEFF;
+
+}
+.buttonbox{
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items:flex-end;
+}
+.homebutton {
+  background-image: url('http://cdn2-www.dogtime.com/assets/uploads/gallery/30-impossibly-cute-puppies/impossibly-cute-puppy-8.jpg');
+  background-size: cover;
+  width: 50px;
+  height: 50%;
+  border-radius: 2.5px;
+  text-align: center;
+}
+
+.twitchbutton {
+  width: 50px;
+  height: 50%;
+  bottom: 0px;
+  text-align: center;
+  background-image: url('./../Glitch_Purple_RGB.png');
+  background-size: cover;
 }

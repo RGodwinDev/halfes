@@ -1,9 +1,9 @@
 angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ, $location){
   $scope.test = "testing"
-  let promise = twitchkeeperServ.getStreamers();
 
+  let promise = twitchkeeperServ.getStreamers();
   promise.then(function(response){
-    $scope.channels = response.data
+    $scope.channels = response.data;
     console.log($scope.channels);
   });
   $scope.test='The streams update every 5 minutes'
@@ -12,7 +12,6 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   $scope.buttonClick = function(){
     let userPromise = twitchkeeperServ.searchUser($scope.userSearchBox.toLowerCase());
     userPromise.then(function(response){
-      console.log(response);
       //if status is good
       if(response.data.stat === 200){
         //goto user view with id
