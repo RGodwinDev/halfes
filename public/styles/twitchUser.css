@@ -1,20 +1,33 @@
 .streamandchat {
  display: flex;
  flex-direction: row;
+ width: 100%;
+}
+.twitchuserbody {
+  background-color: #0f7099;
+  height: 100vh;
+  width: 100%;
 }
 #stream_embed {
-  height: 50vw;
-  width: 70vw;
+  height: 100%;
+  width: 100%;
+}
+.twitchstreambox {
+  width: 70%;
+  height: 40vw;
 }
 
 #chat_embed {
- height: 50vw;
- width: 30vw;
+ height: 100%;
+ width: 100%;
 }
-
+.chatbox {
+  width: 30%;
+  height: 40vw;
+}
 .abovestreamBox {
   height: 40px;
-  background-color: #383838;
+  background-color: #0f7099;
   color: gold;
   font-size: 24px;
   display: flex;

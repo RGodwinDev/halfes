@@ -166,16 +166,35 @@ massive(config.postgres).then(dbInstance => {
           let count = 0;
           //take leftover db streams out
           for(let s = 0; s < streamsres.length; ++s){
-            //need to move from open stream into close stream now
+            //get leftover openstreams, and insert them into closedstream
+            dbInstance.getOpenStream(parseInt(streamsres[s].userid))
+            .then(function(response){
+              //response is an array with anon obj -> [obj]
+              //obj looks like {userid: #, streamid: #, start: #}
 
-            dbInstance.closeStream(parseInt(streamsres[s].userid));
-            ++count;
+              let tobeclosedArr = [];
+              tobeclosedArr.push(response[0].userid);
+              tobeclosedArr.push(response[0].start);
+              tobeclosedArr.push(response[0].streamid);
+              tobeclosedArr.push(new Date());
+              dbInstance.insertClosedStream(tobeclosedArr);
+              //if you see more 'closed stream' after the console logs, it took longer than 1 second to complete
+              console.log('closed stream');
+
+
+              dbInstance.closeStream(parseInt(streamsres[s].userid));
+              ++count;
+            });
+
+
           }//end forloop
+          setTimeout(function(){
           console.log(newstreams + " opened streams");
           console.log(count + " closed streams");
           console.log(newstreams - count + " net change streams");
           console.log(slices + " streams that stayed in db and did nothing");
           console.log(newstreams + slices + " should be in db now")
+        }, 1000);
         }, 5000); //end timeout
       });//end of streamspromise.then getopenstreams
     })//end getTrackedUsers promise.then
@@ -189,7 +208,7 @@ massive(config.postgres).then(dbInstance => {
 }); //end of massive function
 
 masterRoutes(app);
-
+console.log(new Date());
 //passport just piggybacks off the express session and modifies it to be usable for authorizing users
 //initialize passport
 // app.use(passport.initialize());

@@ -1,3 +1,3 @@
-select * from openstreams where streamid = $1
+select * from openstreams where userid = $1
 
 --get 1 stream by streamid
