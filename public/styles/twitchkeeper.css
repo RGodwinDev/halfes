@@ -1,17 +1,63 @@
 .channel-box {
   margin: 5px;
-  padding: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  background-color: #474C55;
+  border-radius: 30px;
+  width: 600px;
 }
-.channel-name {
-  color: blue;
+.control {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-basis:
 }
 .channel-viewers {
   color: red;
 }
+.channel-game {
+  margin-left: 10px;
+  color: #F0F0F0;
 
+}
+.channel-picandname {
+  width: 100px;
+  padding: 10px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: red;
+  background-color: #e2f7ff;
+}
+.channel-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+
+}
 .img {
   height: 100px;
+  width: 100px;
+  border-radius: 10px;
 }
 .megabox {
   background-color: #e2f7ff;
+}
+
+#myChart {
+  display: inline;
+  margin-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.channelpicnameandchart {
+  display: flex;
+  flex-direction: row;
+  background-color: #24BEFF;
+  border-radius: 30px;
 }

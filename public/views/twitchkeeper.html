@@ -4,12 +4,22 @@
 <button id="searchButton" ng-click="buttonClick()">Search</button>
 <!-- channels go here -->
 <span>{{test}}</span>
-<div class='channels-box' ng-repeat="channel in channels">
-  <div class="channel-box">
-    <div class="channel-name" ui-sref='twitchuser({id: channel.userid})'> {{channel.display_name}} </div>
-    <div class="channel-pic"><img class=img src='{{channel.logo}}'> </div>
-    <div class="channel-game"> {{channel.game}} </div>
-    <div class="channel-viewers"> {{channel.viewers}} viewers</div>
+
+<div class="control">
+
+  <div class="channel-box" ng-repeat="channel in channels">
+    <div class="channelpicnameandchart">
+      <div class="channel-picandname">
+        <div class="channel-pic">
+          <img class=img src='{{channel.logo}}' ui-sref='twitchuser({id: channel.userid})'>
+        </div>
+
+      </div>
+      <!--<canvas id="myChart" width="600" height="100"></canvas>-->
+    </div>
+    <div class="channel-game"> {{channel.game}} <span class="channel-viewers"> {{channel.viewers}} viewers on {{channel.display_name}}</span>
+    </div>
   </div>
+</div> <!-- end ng-repeat -->
 </div>
 </div>

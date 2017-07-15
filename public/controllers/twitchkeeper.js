@@ -17,9 +17,12 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
         //goto user view with id
         let path = '/twitchkeeper/u/'+ response.data.userinfo._id;
         $location.path(path);
-      }
+      } //end if
       //else, not good response status
       $scope.test = response.data.failmode;
-    });
-  }
-});
+    }); //end userPromise.then
+  } //end buttonclick function
+
+
+
+}); //end twitchCtrl
