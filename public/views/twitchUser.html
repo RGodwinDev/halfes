@@ -9,25 +9,25 @@
 
 
 <div class="streamandchat">
-<div class="twitchstreambox">
-  <iframe
-    id="stream_embed"
-    ng-src="{{channelSource}}"
-    height="400px";
-    width="600px";
-    scrolling="false"
-    allowfullscreen="true"
-    autoplay="true">
-  </iframe>
-</div>
-<div class="chatbox">
-<iframe frameborder="0"
+  <div class="twitchstreambox">
+    <iframe
+      id="stream_embed"
+      ng-src="{{channelSource}}"
+      height="400px";
+      width="600px";
+      scrolling="false"
+      allowfullscreen="true"
+      autoplay="true">
+    </iframe>
+  </div>
+  <div class="chatbox">
+    <iframe frameborder="0"
         scrolling="no"
         id="chat_embed"
         ng-src="{{chatSource}}"
         height="500"
         width="350">
-</iframe>
-<div class="chatbox">
-</div> <!-- end of streamandchat box -->
+      </iframe>
+    </div> <!-- end chatbox -->
+  </div> <!-- end of streamandchat box -->
 </div> <!-- end of twitchuserbody -->
