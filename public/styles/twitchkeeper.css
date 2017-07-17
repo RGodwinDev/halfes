@@ -48,20 +48,32 @@
   background-color: #e2f7ff;
 }
 
-#myChart {
-  display: inline;
-  margin-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
 .channelpicnameandchart {
   display: flex;
   flex-direction: row;
   background-color: #24BEFF;
   border-radius: 30px;
+  align-items: center;
 }
 
 .twitchbutton {
   height: 70%;
+}
+
+.fakechart {
+  height: 100px;
+  width: 450px;
+  background-color: #F0F0F0;
+  margin-left: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.bar {
+  width: 7%;
+  
+  background-color: #602766;
+  border-radius: 2px;
 }
