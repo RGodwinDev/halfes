@@ -16,6 +16,7 @@
     "express-session": "^1.15.3",
     "massive": "^3.0.0",
     "passport": "^0.3.2",
-    "passport-twitchtv": "^0.1.4"
+    "passport-twitchtv": "^0.1.4",
+    "random-puppy": "^1.1.0"
   }
 }
