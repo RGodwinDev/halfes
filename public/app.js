@@ -24,5 +24,4 @@ angular.module('app', ['ui.router'])
     controller: 'twitchUserCtrl'
   })
 
-
 })

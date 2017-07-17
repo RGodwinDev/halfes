@@ -1,6 +1,4 @@
 angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ, $location){
-  $scope.test = "testing"
-
   let promise = twitchkeeperServ.getStreamers();
   promise.then(function(response){
     $scope.channels = response.data;
@@ -22,7 +20,4 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
       $scope.test = response.data.failmode;
     }); //end userPromise.then
   } //end buttonclick function
-
-
-
 }); //end twitchCtrl
