@@ -81,8 +81,8 @@ module.exports = function(app){
           //streamsres is an array of openstream objects, [openstream, openstream, openstream, etc...]
           //openstream object looks like {userid: bigint, streamid: bigint, start: text}
           //sort streamsres by streamid
-          streamsres.sort(function(a,b){return parseInt(a.userid) - parseInt(b.userid)});
-          response.sort(function(a,b){return parseInt(a.userid) - parseInt(b.userid)})
+          streamsres.sort(function(a,b){return parseInt(a.streamid) - parseInt(b.streamid)});
+          response.sort(function(a,b){return parseInt(a.streamid) - parseInt(b.streamid)})
           //response should be sorted now
           let newstreams = 0;
           let slices = 0;
@@ -117,24 +117,24 @@ module.exports = function(app){
 
           //sort by their streamid
 
-          twitchStreamsArr.sort(function(a,b){return a.channel._id - b.channel._id});
+          twitchStreamsArr.sort(function(a,b){return a._id - b._id});
           let testarr = [];
           for(let i = 0; i < twitchStreamsArr.length; ++i){
-            testarr.push(twitchStreamsArr[i].channel._id);
+            testarr.push(twitchStreamsArr[i]._id);
           }
           indextwitchstreams = 0;
           indexopenstreams = 0;
 
           //while indexes are less than their respective arrays
           while (indexopenstreams < streamsres.length && indextwitchstreams < twitchStreamsArr.length){
-            if(parseInt(streamsres[indexopenstreams].userid) === twitchStreamsArr[indextwitchstreams].channel._id){
+            if(parseInt(streamsres[indexopenstreams].streamid) === twitchStreamsArr[indextwitchstreams]._id){
               //if ids are equal, take them out
               let dbslice = streamsres.splice(indexopenstreams, 1);
               let twitchslice = twitchStreamsArr.splice(indextwitchstreams, 1);
               ++slices;
 
             } //if db id is < twitch id
-            else if(parseInt(streamsres[indexopenstreams].userid) > twitchStreamsArr[indextwitchstreams].channel._id){
+            else if(parseInt(streamsres[indexopenstreams].streamid) > twitchStreamsArr[indextwitchstreams]._id){
               ++indextwitchstreams;
             } //end elseif db id is > twitch id
             else{
@@ -222,7 +222,7 @@ module.exports = function(app){
         if(response[j].endtime < cutoff){ //if endtime < cutoff time, its older than 90 days
 
           let closedarr = [];
-          closedarr.push(response[j].streamid);
+          closedarr.push(response[j].streamid);q
           closedarr.push(response[j].endtime);
 
           //remove closedstream as its too old
