@@ -65,6 +65,12 @@ module.exports = function(app){
 
 
 
+
+
+
+
+
+
   //checking if streams are live or not----//
   //still inside massive function...
   const liveCheck = function(){
@@ -184,6 +190,88 @@ module.exports = function(app){
   liveCheck();
   setInterval(function(){
     liveCheck();
-  }, interval);
+  }, interval); //interval is 5 min
 
+
+
+
+  //this is essentially 2 functions in 1 that uses the same array
+  //culls extra closed streams from the db
+  //also culls ones that are older than 90 days (about 3 months)
+  function closedStreamCull(){
+    //get closed streams sorted by streamid. All of them!
+    //maybe in the future, make it so it only grabs the streams from userid.
+    //so as to limit the number being pulled from the db, so it doesnt overwhelm the server.
+    let promise = dbInstance.getclosedstreams();
+    //should be sorted by streamid coming from db because we sort by streamid in the sql.
+    promise.then(function(response){ //response.data is an array of closed streams. [cs, cs, cs, cs, etc...]
+      // for(let i = 0; i < response.length; ++i){
+      //   console.log(response[i].endtime + ' has a value of ' + response[i].endtime.valueOf());
+      //   console.log(response[i].starttime + ' has a value of ' + response[i].starttime.valueOf());
+      //   console.log('the stream lasted ' + (response[i].endtime.valueOf() - response[i].starttime.valueOf()) + 'msec');
+      // }
+
+      let day = 1000 * 60 * 60 * 24;
+      let days = 90 * day;
+      let now = new Date();
+      let cutoff = now - days;
+
+      //remove streams over a certain age
+      let j = 0;
+      while(j < response.length){
+        if(response[j].endtime < cutoff){ //if endtime < cutoff time, its older than 90 days
+
+          let closedarr = [];
+          closedarr.push(response[j].streamid);
+          closedarr.push(response[j].endtime);
+
+          //remove closedstream as its too old
+          dbInstance.removeclosedstream(closedarr).then(function(){
+            console.log('removed closed stream due to age');
+          }).catch(function(){
+            console.log('failed to remove old closed stream')
+          });
+          //remove from the array too, because thats smart
+          response.splice(j,1);
+        }else{ //if endtime is less than 90 days, go to the next one
+          ++j;
+        }
+      }
+
+
+      for(let i = 1; i < response.length; ++i){
+        //if streamid is the same
+        // console.log(response[i].streamid + " " + response[i - 1].streamid)
+        // console.log(response[i].streamid === response[i - 1].streamid)
+        if(response[i].streamid === response[i - 1].streamid){
+          //check which one has later endtime
+          //if i.end - i-1.end is > 0, i ended later, keep it
+          let closedstream;
+          if(response[i].endtime - response[i-1].endtime > 0){ //if i is bigger than i-1
+            closedstream = response[i-1]; //set i-1 to be the deleted one
+          } else { //i-1 is bigger or even, delete i
+            closedstream = response[i];
+          }
+          //put earlier closedstream streamid and endtime into closedarr
+          let closedarr = [];
+          closedarr.push(closedstream.streamid);
+          closedarr.push(closedstream.endtime);
+
+          //remove the one with the earlier endtime
+          dbInstance.removeclosedstream(closedarr).then(function(){
+            console.log('removed closed stream due to being a duplicate');
+          }).catch(function(){
+            console.log('failed to remove old closed stream')
+          });
+        }//end if
+      }//end forloop
+    })//end promise.then
+
+  }//end closedStreamCull function
+  closedStreamCull();
+  //this only runs once, at server boot
+  //unless we want to set an interval
+  setInterval(function(){
+
+  }, interval * 12); //interval is 5 min, * 12 = once an 1 hour
 }
