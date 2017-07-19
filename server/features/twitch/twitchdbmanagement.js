@@ -195,6 +195,9 @@ module.exports = function(app){
 
 
 
+
+
+
   //this is essentially 2 functions in 1 that uses the same array
   //culls extra closed streams from the db
   //also culls ones that are older than 90 days (about 3 months)
@@ -272,6 +275,6 @@ module.exports = function(app){
   //this only runs once, at server boot
   //unless we want to set an interval
   setInterval(function(){
-
+    closedStreamCull();
   }, interval * 12); //interval is 5 min, * 12 = once an 1 hour
 }
