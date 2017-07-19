@@ -99,7 +99,7 @@ module.exports = function(app){
             axios({
               method:'GET',
               url:queryOut,
-              timeout:3000,
+              timeout:10000,
               headers:{'Client-ID': config.Strategy.clientID,
               'Accept': 'application/vnd.twitchtv.v5+json'},
             }).then(function(queryResponse){ //queryResponse is the response from twitch, up to 99 streams, but probably less.
@@ -182,7 +182,7 @@ module.exports = function(app){
           console.log(slices + " streams that stayed in db and did nothing");
           console.log(newstreams + slices + " should be in db now")
         }, 1000);
-        }, 5000); //end timeout
+        }, 30000); //end timeout
       });//end of streamspromise.then getopenstreams
     })//end getTrackedUsers promise.then
   }//end of liveCheck function ------------////
