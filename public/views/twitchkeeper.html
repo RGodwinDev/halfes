@@ -10,38 +10,15 @@
   <div class="channel-box" ng-repeat="channel in channels">
     <div class="channelpicnameandchart">
       <div class="channel-picandname">
-        <div class="channel-pic">
-          <img class=img src='{{channel.logo}}' ui-sref='twitchuser({id: channel.userid})'>
-        </div>
+        <a class="channel-pic" ui-sref='twitchuser({id: channel.userid})'>
+          <img class=img src='{{channel.logo}}'>
+      </a>
 
       </div>
       <!--<canvas id="myChart" width="600" height="100"></canvas>-->
       <!-- remove this when we get real chart to use -->
-      <div class='fakechart'>
-          <div class='bar' style="height: 2%">
-          </div>
-          <div class='bar' style="height: 12%">
-          </div>
-          <div class='bar' style="height: 20%">
-          </div>
-          <div class='bar' style="height: 20%">
-          </div>
-          <div class='bar' style="height: 60%">
-          </div>
-          <div class='bar' style="height: 80%">
-          </div>
-          <div class='bar' style="height: 90%">
-          </div>
-          <div class='bar' style="height: 95%">
-          </div>
-          <div class='bar' style="height: 60%">
-          </div>
-          <div class='bar' style="height: 40%">
-          </div>
-          <div class='bar' style="height: 25%">
-          </div>
-          <div class='bar' style="height: 5%">
-          </div>
+      <div class="keepercharts">
+          <chart-dir>
       </div>
       <!-- !!! -->
     </div>

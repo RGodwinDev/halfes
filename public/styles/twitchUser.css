@@ -46,3 +46,8 @@
 .twitchbutton {
   height: 70%;
 }
+
+#userchartholder {
+    height: 100px;
+    width: 400px;
+}

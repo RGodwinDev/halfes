@@ -1,6 +1,4 @@
-angular.module('app').service('homeServ', function($http){
+angular.module('app').service('homeServ', function(){
 
-  this.getpuppy = function(){
-    return $http.get('/api/getpuppy');
-  }
+
 })

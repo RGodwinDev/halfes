@@ -23,5 +23,9 @@ angular.module('app', ['ui.router'])
     templateUrl: './views/twitchUser.html',
     controller: 'twitchUserCtrl'
   })
-
+  .state('cat', {
+      url: '/cat',
+      templateUrl: './views/cat.html',
+      controller: 'catCtrl'
+  })
 })

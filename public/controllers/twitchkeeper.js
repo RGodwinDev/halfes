@@ -20,4 +20,10 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
       $scope.test = response.data.failmode;
     }); //end userPromise.then
   } //end buttonclick function
+
+
+  let test = twitchkeeperServ.getclosedStreams(26490481);
+  test.then(function(response){
+      console.log(response);
+  })
 }); //end twitchCtrl

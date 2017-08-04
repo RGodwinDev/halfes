@@ -59,21 +59,7 @@
 .twitchbutton {
   height: 70%;
 }
-
-.fakechart {
-  height: 100px;
-  width: 450px;
-  background-color: #F0F0F0;
-  margin-left: 10px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: flex-end;
-}
-.bar {
-  width: 7%;
-  
-  background-color: #602766;
-  border-radius: 2px;
+.keepercharts{
+    height: 100px;
+    width: 450px;
 }

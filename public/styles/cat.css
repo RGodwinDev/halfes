@@ -1,0 +1,10 @@
+.catbody{
+
+}
+#cat {
+    height: 500px;
+}
+.secretcattext{
+    display: inline-block;
+    font-size: 42px;
+}

@@ -1,0 +1,17 @@
+.bar {
+  width: 7%;
+  background-color: #602766;
+  border-radius: 2px;
+}
+
+.fakechart {
+  height: 100%;
+  width: 100%;
+  background-color: #F0F0F0;
+  margin-left: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-end;
+}

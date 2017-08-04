@@ -27,3 +27,7 @@
   background-image: url('./../Glitch_Purple_RGB.png');
   background-size: cover;
 }
+
+.secretcattext {
+    display: none;
+}
