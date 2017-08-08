@@ -1,6 +1,6 @@
 angular.module('app', ['ui.router'])
 .config(function($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise('/twitchkeeper');
+  $urlRouterProvider.otherwise('/');
 
   $stateProvider
   .state('home', {
