@@ -2,7 +2,22 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   let promise = twitchkeeperServ.getStreamers();
   promise.then(function(response){
     $scope.channels = response.data;
-    console.log($scope.channels);
+    console.log(response.data);
+    for(let i = 0; i < response.data.length; ++i){
+        let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
+        superpromise.then(function(superres){
+
+            //calculate the length of each stream, and add it to them.
+            for(let j = 0; j < superres.data.length; ++j){
+                superres.data[j].streamlength = (Date.parse(superres.data[j].endtime) - Date.parse(superres.data[j].starttime)) / (1000 * 60 * 60 * 24);
+            }
+
+            //put the streams into their respective channel
+            $scope.channels[i].streams = superres.data;
+            // console.log(Date.parse(superres.data[0].endtime) - Date.parse(superres.data[0].starttime));
+
+        });
+    }
   });
   $scope.test='The streams update every 5 minutes'
   //clicking search button gets the user from the input text
@@ -22,8 +37,5 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   } //end buttonclick function
 
 
-  let test = twitchkeeperServ.getclosedStreams(26490481);
-  test.then(function(response){
-      console.log(response);
-  })
+
 }); //end twitchCtrl
