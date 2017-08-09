@@ -6,6 +6,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
     $scope.channels = response.data;
     console.log(response.data);
     let now = Date.parse(new Date()) - (86400000 * 90);
+    console.log(new Date());
 
     for(let i = 0; i < response.data.length; ++i){
         let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
