@@ -19,6 +19,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
                 //if you change the height of the line, expect it to break.
                 superres.data[j].yOffset = (parseInt((Date.parse(superres.data[j].starttime) - now)/ 86400000)/90) - ([j]/90);
                 superres.data[j].xOffset = ((parseInt((Date.parse(superres.data[j].starttime) - now) % 86400000)/86400000));
+                console.log(superres.data[j].starttime)
                 console.log(superres.data[j].yOffset);
                 console.log(superres.data[j].xOffset);
 
