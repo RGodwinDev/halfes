@@ -4,9 +4,9 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   //get channels
   promise.then(function(response){
     $scope.channels = response.data;
-    console.log(response.data);
+    // console.log(response.data);
     let now = Date.parse(new Date()) - (86400000 * 90);
-    console.log(new Date());
+    // console.log(new Date());
 
     for(let i = 0; i < response.data.length; ++i){
         let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
@@ -19,9 +19,9 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
                 //if you change the height of the line, expect it to break.
                 superres.data[j].yOffset = (parseInt((Date.parse(superres.data[j].starttime) - now)/ 86400000)/90) - ([j]/90);
                 superres.data[j].xOffset = ((parseInt((Date.parse(superres.data[j].starttime) - now) % 86400000)/86400000));
-                console.log(superres.data[j].starttime)
-                console.log(superres.data[j].yOffset);
-                console.log(superres.data[j].xOffset);
+                // console.log(superres.data[j].starttime)
+                // console.log(superres.data[j].yOffset);
+                // console.log(superres.data[j].xOffset);
 
             }
 
