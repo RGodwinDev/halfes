@@ -1,15 +1,26 @@
 angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ, $location){
   let promise = twitchkeeperServ.getStreamers();
+
+  //get channels
   promise.then(function(response){
     $scope.channels = response.data;
     console.log(response.data);
+    let now = Date.parse(new Date()) - (86400000 * 90);
+
     for(let i = 0; i < response.data.length; ++i){
         let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
         superpromise.then(function(superres){
 
-            //calculate the length of each stream, and add it to them.
+            //calculate the specifics of each stream, and add it to them.
             for(let j = 0; j < superres.data.length; ++j){
                 superres.data[j].streamlength = (Date.parse(superres.data[j].endtime) - Date.parse(superres.data[j].starttime)) / (1000 * 60 * 60 * 24);
+                // the j in the offset only works because the lines are 1 pixel tall. otherwise they wouldnt work i think?
+                //if you change the height of the line, expect it to break.
+                superres.data[j].yOffset = (parseInt((Date.parse(superres.data[j].starttime) - now)/ 86400000)/90) - ([j]/90);
+                superres.data[j].xOffset = ((parseInt((Date.parse(superres.data[j].starttime) - now) % 86400000)/86400000));
+                console.log(superres.data[j].yOffset);
+                console.log(superres.data[j].xOffset);
+
             }
 
             //put the streams into their respective channel

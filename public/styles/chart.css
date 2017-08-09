@@ -3,6 +3,11 @@
   background-color: #602766;
   border-radius: 2px;
   height: 1px;
+  position: relative;
+
+}
+.bar:hover{
+    background-color: yellow;
 }
 
 .realchart {
@@ -11,8 +16,5 @@
   background-color: #F0F0F0;
   margin-left: 10px;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+
 }

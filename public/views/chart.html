@@ -3,7 +3,11 @@
 <!-- chart takes up the space of whatever it is inside -->
 
 <div class='realchart'>
-    <div class="bar" style="width: calc((100% * {{stream.streamlength}})); font-size: 3px;" ng-repeat="stream in channel.streams">
+    <div class="bar" style="
+        width: calc((100% * {{stream.streamlength}}));
+        font-size: 3px; top: calc(100% * {{stream.yOffset}});
+        left: calc(100% * {{stream.xOffset}})"
+        ng-repeat="stream in channel.streams">
 
     </div>
 </div>
