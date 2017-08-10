@@ -18,3 +18,23 @@
   border-radius: 10px;
 
 }
+
+.bars{
+    height: 100%;
+    width: 100%;
+}
+.x-axis{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 10px;
+}
+.y-axis{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 10px;
+    height: calc(100% + 10px);
+    bottom: 210px;
+}

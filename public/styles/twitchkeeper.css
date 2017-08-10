@@ -6,7 +6,7 @@
   padding-right: 10px;
   background-color: #474C55;
   border-radius: 30px;
-  width: 600px;
+  width: 800px;
 }
 .control {
   display: flex;
@@ -54,12 +54,13 @@
   background-color: #24BEFF;
   border-radius: 30px;
   align-items: center;
+  padding: 20px;
 }
 
 .twitchbutton {
   height: 70%;
 }
 .keepercharts{
-    height: 100px;
-    width: 450px;
+    height: 200px;
+    width: 600px;
 }

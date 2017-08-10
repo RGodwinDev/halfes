@@ -1,11 +1,113 @@
 .homebody {
-  background-color: #e2f7ff;
-  height: 100%;
+  background-color: #F0F0F0;
+
 }
 .homebutton {
   height: 70%;
 }
+#hi {
+    padding: 20px;
+}
+#intro {
+    padding:20px;
+}
+#edu {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#edutext{
+    font-weight: bold;
+}
+#ou {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+#oulogo{
+    width: 30px;
+    height: 45px;
+}
+#outext{
 
-#pup {
-  height: 500px;
+}
+#javaimg{
+    height: 25px;
+    width: 20px;
+}
+#dev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+#devlogo {
+    width: 32px;
+    height: 30px;
+}
+#devtext {
+
+}
+#htmllogo{
+    width: 30px;
+}
+#projects{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#projectstext{
+    font-weight: bold;
+}
+#twitchkeeper {
+    padding: 20px;
+}
+#twitchproject{
+    text-decoration: underline;
+}
+#twitchprojecttext{
+    padding: 20px;
+}
+#twitchprojectimgs{
+    padding: 20px;
+}
+#keepernowindow{
+    height: 200px;
+}
+#keepersingle{
+    height: 200px;
+    padding-left: 10px;
+}
+#mithi {
+    padding: 20px;
+}
+#mithiproject{
+    text-decoration: underline;
+}
+#mithiprojecttext{
+    padding: 20px;
+}
+#cats {
+    padding: 20px;
+}
+#contact{
+    padding: 20px;
+}
+#contactbox{
+    padding: 20px;
+}
+#contacttext{
+    font-weight: bold;
+}
+#linkedinimg{
+    width:20px;
+}
+#githubimg{
+    width: 20px;
+}
+#emailimg{
+    width: 20px;
 }
