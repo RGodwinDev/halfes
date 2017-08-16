@@ -5,8 +5,8 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   promise.then(function(response){
     $scope.channels = response.data;
     console.log(response.data);
+    //now is now, but 90 days ago
     let now = Date.parse(new Date()) - (86400000 * 90);
-    // console.log(new Date());
 
     for(let i = 0; i < response.data.length; ++i){
         let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
