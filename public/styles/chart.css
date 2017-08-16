@@ -4,10 +4,11 @@
   border-radius: 2px;
   height: 1px;
   position: relative;
+  
 
 }
 .bar:hover{
-    background-color: yellow;
+  background-color: red;
 }
 
 .realchart {
