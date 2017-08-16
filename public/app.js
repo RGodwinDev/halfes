@@ -5,7 +5,7 @@ angular.module('app', ['ui.router'])
   $stateProvider
   .state('home', {
     url: '/',
-    templateUrl:'./views/home.html',
+    templateUrl:'./home/home.html',
     controller:'homeCtrl'
   })
   .state('login', {
@@ -15,17 +15,17 @@ angular.module('app', ['ui.router'])
   })
   .state('twitch', {
     url: '/twitchkeeper',
-    templateUrl: './views/twitchkeeper.html',
+    templateUrl: './twitch/twitchkeeper.html',
     controller: 'twitchCtrl'
   })
   .state('twitchuser', {
     url: '/twitchkeeper/u/:id',
-    templateUrl: './views/twitchUser.html',
+    templateUrl: './twitch/twitchUser.html',
     controller: 'twitchUserCtrl'
   })
   .state('cat', {
       url: '/cat',
-      templateUrl: './views/cat.html',
+      templateUrl: './cat/cat.html',
       controller: 'catCtrl'
   })
 })
