@@ -19,6 +19,7 @@
 }
 #edutext{
     font-weight: bold;
+    font-size: 20px;
 }
 #ou {
     display: flex;
@@ -61,6 +62,10 @@
 }
 #projectstext{
     font-weight: bold;
+    font-size: 20px;
+}
+#projectscontainer{
+    border-radius: 2px;
 }
 #twitchkeeper {
     padding: 20px;
@@ -101,6 +106,7 @@
 }
 #contacttext{
     font-weight: bold;
+    font-size: 20px;
 }
 #linkedinimg{
     width:20px;

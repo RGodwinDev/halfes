@@ -12,12 +12,32 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
         let superpromise = twitchkeeperServ.getclosedStreams(response.data[i].userid);
         superpromise.then(function(superres){
 
+
             //calculate the specifics of each stream, and add it to them.
             for(let j = 0; j < superres.data.length; ++j){
-                if(Date.parse(superres.data[j].endtime)%86400000 < Date.parse(superres.data[j].starttime)%86400000){
+              //if endtime doesnt end on same day as starttime
+                if(parseInt(Date.parse(superres.data[j].endtime)/86400000) !== parseInt(Date.parse(superres.data[j].starttime)/86400000)){
+
+
+                  //make endtime be 24 hours - 1 ms, 86399999ms
+                  //TODO: make more streams, so they continue on the other side, starting from 0.
+
+                    //endtime = endtime from current j stream
+                    //starttime = current starttime + whatever is needed to make it to 86400000
+                    //streamid = same
+                    //userid = same
+
+
+
+
+                    superres.data.push();
+                  //make it have startime of 0, and endtime of the stream
+                  //will it be able to go in the correct place? idk, we'll see
                     superres.data[j].endtime = 86400000-1;
                     console.log('before edit');
+                    console.log('---endtime---')
                     console.log(superres.data[j].endtime);
+                    //length is (endtime - (starttime%86400000)) / 86400000, making it a length between 0 and 1.
                     superres.data[j].streamlength = (superres.data[j].endtime - (Date.parse(superres.data[j].starttime)%86400000))/86400000;
                     console.log('stream length with edit');
                     console.log(superres.data[j].streamlength);
@@ -27,6 +47,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
                                     console.log('end time');
                                     console.log((superres.data[j].endtime%86400000));
                 }
+                //endtime doesnt have less ms than starttime
                 else{
                     superres.data[j].streamlength = (Date.parse(superres.data[j].endtime) - Date.parse(superres.data[j].starttime)) / (1000 * 60 * 60 * 24);
                     console.log('stream length');
@@ -38,10 +59,15 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
                                     console.log((parseInt(Date.parse(superres.data[j].endtime))%86400000));
                 }
 
-                // the j in the offset only works because the lines are 1 pixel tall. otherwise they wouldnt work i think?
-                //if you change the height of the line, expect it to break.
+                //yoffset is (starttime - all time up to 90 days ago), which should be jan1 1970, until 90 days ago, in ms
+                // divide by 1 day in ms, to make it into how many days, since 90 days ago.
+                // divide by 90 to make into a number between 0 and 1.
+                // subtract j/90, so that its placement isnt affected by where it is in the array. this only works because each stream is 1 pixel tall.
+                //expect this to break if you change the line thickness
                 superres.data[j].yOffset = (parseInt((Date.parse(superres.data[j].starttime) - now)/ 86400000)/90) - ([j]/90);
-                superres.data[j].xOffset = ((parseInt((Date.parse(superres.data[j].starttime) - now) % 86400000)/86400000));
+
+                //xoffset is (starttime % 86400000) / 86400000, which makes it between 0 and 1
+                superres.data[j].xOffset = ((parseInt(Date.parse(superres.data[j].starttime) % 86400000)/86400000));
                 // console.log(superres.data[j].starttime)
                 // console.log(superres.data[j].yOffset);
                 // console.log(superres.data[j].xOffset);
