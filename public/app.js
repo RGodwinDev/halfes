@@ -15,12 +15,12 @@ angular.module('app', ['ui.router'])
   })
   .state('twitch', {
     url: '/twitchkeeper',
-    templateUrl: './twitch/twitchkeeper.html',
+    templateUrl: './twitch/keeper/twitchkeeper.html',
     controller: 'twitchCtrl'
   })
   .state('twitchuser', {
     url: '/twitchkeeper/u/:id',
-    templateUrl: './twitch/twitchUser.html',
+    templateUrl: './twitch/user/twitchUser.html',
     controller: 'twitchUserCtrl'
   })
   .state('cat', {
