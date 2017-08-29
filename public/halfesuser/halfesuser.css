@@ -1,0 +1,26 @@
+#halfesuserbody{
+  background-color: red;
+}
+.contain{
+  margin:auto;
+  display: flex;
+  width: 850px;
+  background-color: green;
+}
+#left {
+  background-color: orange;
+  width: 250px;
+}
+.headshot{
+  height: 100px;
+  width: 100px;
+}
+.name{
+  color: gold;
+  font-size: 20px;
+}
+#right {
+  background-color: violet;
+  width: 600px;
+
+}

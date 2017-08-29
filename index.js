@@ -1,11 +1,12 @@
+const config = require('./server/config');
+
 const express = require('express');
 const cors = require('cors');
 const {json} = require('body-parser');
 //port, probably need to change it if im going to have it hosted elsewhere
-const port = 80; //80 is default for most servers
+const port = config.port; //80 is default for most servers
 const massive = require('massive');
 const session = require('express-session');
-const config = require('./server/config');
 // const passport = require('passport');
 // const { Strategy } = require('passport-twitch');
 const masterRoutes = require('./server/masterRoutes');
@@ -32,6 +33,7 @@ massive(config.postgres).then(dbInstance => {
 
   //this has most of the stuff happening inside of it!
   //index.js is 10x shorter because its in here now
+  //in the future, this should be on another server, just for twitch stuff.
   twitchdbmanage(app);
 }); //end of massive function
 

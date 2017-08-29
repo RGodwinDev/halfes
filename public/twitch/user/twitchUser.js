@@ -9,6 +9,7 @@ angular.module('app')
     $scope.channelSource = $sce.trustAsResourceUrl('http://player.twitch.tv/?channel=' + response.data[0].name);
     $scope.chatSource = $sce.trustAsResourceUrl('http://www.twitch.tv/'+ response.data[0].name + '/chat');
     $scope.logo = response.data[0].logo;
+    $scope.name = response.data[0].display_name;
 
     let now = Date.parse(new Date()) - (86400000 * 90);
 
