@@ -28,4 +28,14 @@ angular.module('app', ['ui.router'])
       templateUrl: './cat/cat.html',
       controller: 'catCtrl'
   })
+  .state('blog', {
+    url: '/blog',
+    templateUrl: './blog/blog.html',
+    controller: 'blogCtrl'
+  })
+  .state('halfesuser', {
+    url: '/u/:id',
+    templateUrl: './halfesuser/halfesuser.html',
+    controller: 'halfesUserCtrl'
+  })
 })
