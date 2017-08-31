@@ -1,3 +1,9 @@
+nav-dir{
+  display: none;
+}
+foot-dir{
+  display: none;
+}
 .homebody {
   background-color: #F0F0F0;
 
@@ -5,31 +11,54 @@
 .homebutton {
   height: 70%;
 }
+.intro{
+  height: 600px;
+  text-align: center;
+  background-color: orange;
+  font-family: 'Gochi Hand', cursive;
+  font-size: 72px;
+  background-image: url(./../assets/home/dallas-skyline.jpg);
+  background-position: center;
+  color: #F0F0F0;
+  text-shadow: 0px 0px 3px black;
+}
 #hi {
-    padding: 20px;
+    padding-top: 200px;
+    padding-bottom: 80px;
+
+}
+#helloworld{
+
 }
 #intro {
     padding:20px;
+
 }
 #edu {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  padding: 20px;
+}
+#educontain{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 20px;
 }
 #edutext{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 64px;
+    text-align: center;
 }
 #ou {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 #oulogo{
-    width: 30px;
-    height: 45px;
+    width: 200px;
+    height: 300px;
 }
 #outext{
 
@@ -40,13 +69,14 @@
 }
 #dev {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 10px;
 }
 #devlogo {
-    width: 32px;
-    height: 30px;
+    width: 320px;
+    height: 300px;
 }
 #devtext {
 
@@ -58,20 +88,32 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-}
+    align-items: center;
+  }
 #projectstext{
     font-weight: bold;
-    font-size: 20px;
+    font-size: 64px;
+    text-align: center;
 }
 #projectscontainer{
     border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+
+    width: 80%;
 }
 #twitchkeeper {
     padding: 20px;
+    width: 100%;
+}
+#keeperspan{
+   font-family: helvetica;
+   font-size: 18px;
 }
 #twitchproject{
-    text-decoration: underline;
+    text-shadow: 0px 1px black;
+    font-family: helvetica;
+    font-size: 20px;
 }
 #twitchprojecttext{
     padding: 20px;
@@ -88,9 +130,13 @@
 }
 #mithi {
     padding: 20px;
+    width: 100%;
+
 }
 #mithiproject{
-    text-decoration: underline;
+  text-shadow: 0px 1px black;
+  font-family: helvetica;
+  font-size: 20px
 }
 #mithiprojecttext{
     padding: 20px;
@@ -116,4 +162,10 @@
 }
 #emailimg{
     width: 20px;
+}
+
+@media(max-width: 180px){
+  .intro{
+    height: 500px;
+  }
 }

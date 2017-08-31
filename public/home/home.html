@@ -1,57 +1,72 @@
 <link rel="stylesheet" href="./home/home.css"></styles>
-
+<title>Ryan Godwin | Portfolio</title>
+<!-- This will eventually be ryan.godwin.me -->
 <div class="homebody">
+  <div class="intro">
     <div id="hi">
-        <span ng-style="H">H</span><span ng-style="e">e</span><span ng-style="l1">l</span><span ng-style="l2">l</span><span ng-style="o1">o</span><span> </span>
-        <span ng-style="W">W</span><span ng-style="o2">o</span><span ng-style="r">r</span><span ng-style="l3">l</span><span ng-style="d">d</span><span ng-style="ex">!</span>
+        <span id="helloworld">Hello World!</span>
     </div>
     <div id="intro">
-        <p>My name is Ryan Godwin. </p>
-        <p>I won't waste a bunch of time, so heres some info...</p>
+        <p>Ryan Godwin</p>
     </div>
+  </div>
     <br>
     <div id="edu">
         <div id="edutext">Education</div>
+        <div id="educontain">
+        <a href="http://www.ou.edu" target="_blank">
         <div id="ou">
-            <img id="oulogo" src="./../2000px-OU-Logo.svg.png">
-            <p id="outext">I went to University of Oklahoma for a year of CS. I learned some<span><img id="javaimg" src="http://logodatabases.com/wp-content/uploads/2012/03/java-logo-large.png"></img></span>Java and Data Structures there.</p>
+            <img id="oulogo" src="./../assets/home/2000px-OU-Logo.svg.png">
+            <p>University of Oklahoma</p>
+            <p>January 2016 - May 2017</p>
+            <p id="outext"><img id="javaimg" src="./../assets/home/java-logo-large.png"></img> and some DataStructures</p>
         </div>
+        </a>
+        <a href="https://devmountain.com" target="_blank">
         <div id="dev">
-            <img id="devlogo" src="./../devmountain_logo.png">
-            <p id="devtext"> Then I went to DevMountain, a coding bootcamp where you learn to make websites with
-            <span><img id='htmllogo' src="https://www.w3.org/html/logo/downloads/HTML5_Logo_512.png"></img></span>
-            HTML, <span><img id="htmllogo" src="http://hguochen.com/static/img/tech/css3.png"></img></span>
-            CSS, <span><img id="htmllogo" src="./../js-logo.png"></img></span>
-            JavaScript, <span><img id="htmllogo"src="https://angular.io/assets/images/logos/angularjs/AngularJS-Shield.svg"></img></span>
-            AngularJS or <span><img id="htmllogo" src="http://ecodile.com/wp-content/uploads/2016/08/react-logo-1000-transparent.png"></img></span>
-            React, <span><img id="htmllogo"src="https://cdn2.iconfinder.com/data/icons/nodejs-1/512/nodejs-512.png"></img></span>
-            Node.js, and <span><img id="htmllogo" src="http://www.unixstickers.com/image/cache/data/stickers/postgresql/postgresql-340x340.png"></img></span>
-            PostgreSQL.</p>
+
+            <img id="devlogo" src="./../assets/home/devmountain_logo.png">
+            <p>DevMountain</p>
+            <p>Summer 2017</p>
+            <div>
+              <img id='htmllogo' src="./../assets/home/HTML5_Logo_512.png" alt="html5"></img>
+              <img id="htmllogo" src="./../assets/home/css3.png" alt="css3"></img>
+              <img id="htmllogo" src="./../assets/home/js-logo.png" alt="JavaScript"></img>
+              <img id="htmllogo"src="./../assets/home/AngularjS-Shield.svg" alt="AngularJS 1.x"></img>
+              <img id="htmllogo" src="./../assets/home/react-logo-1000-transparent.png" alt="React"></img>
+              <img id="htmllogo"src="./../assets/home/nodejs-512.png" alt="node.JS"></img>
+              <img id="htmllogo" src="./../assets/home/postgresql-340x340.png" alt="PostgreSQL"></img>
+          </div>
         </div>
+        </a>
+      </div>
     </div>
     <br>
     <div id="projects">
         <div id="projectstext">Projects</div>
         <div id="projectscontainer">
         <div id="twitchkeeper">
-            <div id="twitchproject">Twitchkeeper</div>
+          <a href="http://halfes.com/#!/twitchkeeper" target="_blank">
+            <div id="twitchproject">Twitchkeeper <span id="keeperspan">http://halfes.com/#!/twitchkeeper</span></div>
+          </a>
             <div id="twitchprojecttext">
-                <p>You can see this one by clicking the twitch icon above or clicking <a href="http://halfes.com/#!/twitchkeeper" target="_blank">here.</a>
                 <p>It tracks Twitch.tv streamers and when they are streaming, displaying on a chart when they are usually on.</p>
-                <p>Built with JavaScript, AngularJS, Node.js, PostgreSQL and uses the <a href="https://www.twitch.tv/" target="_blank">twitch.tv</a> api.</p>
-                <p>The chart is still a bit not fully there yet, but it works.</p>
+                <p>Built with JavaScript, AngularJS, Node.js, PostgreSQL and uses the <a href="https://dev.twitch.tv/docs" target="_blank">twitch.tv</a> api.</p>
+
             </div>
             <div id="twitchprojectimgs">
-                <img id="keepernowindow" src="./../keepernowindow.png"></img>
-                <img id="keepersingle" src="./../keepersingle.png"></img>
+                <img id="keepernowindow" src="./../assets/home/keepernowindow.png"></img>
+                <img id="keepersingle" src="./../assets/home/keepersingle.png"></img>
             </div>
         </div>
         <br>
         <div id="mithi">
-            <div id="mithiproject">Mithi Kalra</div>
+          <a href="http://mithikalra.herokuapp.com/" target="_blank">
+            <div id="mithiproject">Mithi Kalra <span id="keeperspan">http://mithikalra.herokuapp.com</span></div>
+          </a>
             <div id="mithiprojecttext">
-                <p>We also did a 4 man group project that you can see <a href="http://mithikalra.herokuapp.com/" target="_blank">here.</a></p>
-                <p>It is an ecommerce site for a fashion designer, built with React, Node.js, PostgreSQL, and AWS S3.</p>
+
+              <p>An ecommerce site for a fashion designer, built with React, Node.js, PostgreSQL, and AWS S3.</p>
             </div>
         </div>
       </div>
@@ -65,9 +80,9 @@
     <div id="contact">
         <p id="contacttext">Contact Info</p>
         <div id="contactbox">
-            <p><a href="https://www.linkedin.com/in/ryangodwin524/" target="_blank"><img id="linkedinimg" src="http://illinoispartners.com/wp-content/uploads/2013/10/LinkedIn-Logo-02.png"></img>LinkedIn</a></p>
-            <p><a href="https://github.com/FinalFlashLight" target="_blank"><img id="githubimg" src="./../github-logo-icon-16174.png"></img>Github</a></p>
-            <p><img id="emailimg" src="./../envelope-icon-18240.png"></img>Email: ryan.godwin at outlook.com </p>
+            <p><a href="https://www.linkedin.com/in/ryangodwin524/" target="_blank"><img id="linkedinimg" src="./../assets/home/LinkedIn-Logo-02.png"></img>LinkedIn</a></p>
+            <p><a href="https://github.com/FinalFlashLight" target="_blank"><img id="githubimg" src="./../assets/home/github-logo-icon-16174.png"></img>Github</a></p>
+            <p><img id="emailimg" src="./../assets/home/envelope-icon-18240.png"></img>Ryan.godwin524 at outlook.com </p>
         </div>
     </div>
 </div>
