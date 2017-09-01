@@ -1,45 +1,22 @@
-angular.module('app').controller('homeCtrl', function($scope, homeServ){
-    // $scope.H = {
-    //     'color': 'purple',
-    // }
-    // $scope.W = {
-    //     'color': 'black',
-    // }
-    // $scope.e = {
-    //     'color': 'black',
-    // }
-    // $scope.l1 = {
-    //     'color': 'black',
-    // }
-    // $scope.l2 = {
-    //     'color': 'black',
-    // }
-    // $scope.o2 = {
-    //     'color': 'black',
-    // }
-    // $scope.o1 = {
-    //     'color': 'black',
-    // }
-    // $scope.r = {
-    //     'color': 'black',
-    // }
-    // $scope.l3 = {
-    //     'color': 'black',
-    // }
-    // $scope.d = {
-    //     'color': 'black',
-    // }
-    // console.log($scope.H);
-    // let colors = ['yellow', 'red', 'blue', 'purple', 'violet', 'green', 'pink', 'orange'];
-    // let interval = 500;
-    // setInterval(function(){
-    //  let num = Math.floor(Math.random() * colors.length);
-    //  console.log(num);
-    //  $scope.H = {
-    //      'color': colors[num],
-    //  }
-    //  console.log($scope.H);
-    //  console.log('color change');
-    // }, interval);
+angular.module('app').controller('homeCtrl', function($scope, homeServ, $interval){
+
+    $scope.world = "Dallas";
+    $scope.worldstyle = {
+      'background-image': "url('./../assets/home/dallas-skyline.jpg')"
+    }
+    let wordarr = ['New York', 'San Francisco', 'Austin', 'Dallas'];
+    let backgroundarr = ['./../assets/home/newyorkskyline.png', './../assets/home/sanfran.png',
+     './../assets/home/atx-pano.jpg', './../assets/home/dallas-skyline.jpg']
+    let num = 0;
+    $interval(function(){
+      $scope.world = wordarr[num];
+      $scope.worldstyle={
+        'background-image': "url('" + backgroundarr[num] + "')"
+      };
+      ++num;
+      if(num === wordarr.length){
+        num = 0;
+      }
+    }, 3000);
 
 });

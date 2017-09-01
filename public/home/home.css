@@ -17,7 +17,7 @@ foot-dir{
   background-color: orange;
   font-family: 'Gochi Hand', cursive;
   font-size: 72px;
-  background-image: url(./../assets/home/dallas-skyline.jpg);
+  /*background-image: url(./../assets/home/dallas-skyline.jpg);*/
   background-position: center;
   color: #F0F0F0;
   text-shadow: 0px 0px 3px black;
