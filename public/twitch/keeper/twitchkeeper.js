@@ -4,7 +4,7 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
   //get channels
   promise.then(function(response){
     $scope.channels = response.data;
-    // console.log(response.data);
+    console.log(response.data);
     //now is now, but 90 days ago
     let now = Date.parse(new Date()) - (86400000 * 90);
 
@@ -20,29 +20,34 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
                && parseInt(Date.parse(superres.data[j].endtime)/86400000) > parseInt(Date.parse(superres.data[j].starttime)/86400000)){
 
 
-                  //make endtime be 24 hours - 1 ms, 86399999ms
-                  //TODO: make more streams, so they continue on the other side, starting from 0.
+                  //make endtime be 24 hours - 1 ms, 86399999ms 
+                  
 
                     //endtime = endtime from current j stream
                     let newend = new Date(Date.parse(superres.data[j].endtime));
                     // console.log('new endtime');
                     // console.log(newend);
                     // console.log(newend%86400000);
+
                     //starttime = current starttime + whatever is needed to make it to 86400000
                     let newstart = new Date(Date.parse(superres.data[j].starttime) + 86400000 - (Date.parse(superres.data[j].starttime)%86400000));
                     // console.log('new starttime');
                     // console.log(newstart);
                     // console.log(newstart%86400000);
+
                     //streamid = same
                     let streamid = superres.data[j].streamid;
                     // console.log('stream');
                     // console.log(streamid);
+
                     //userid = same
                     let userid = superres.data[j].userid;
                     // console.log('user');
                     // console.log(userid);
+
                     // console.log(new Date(newend));
                     // console.log(new Date(newstart));
+
                     let newstream = {
                       endtime: newend,
                       starttime: newstart,
@@ -91,10 +96,11 @@ angular.module('app').controller('twitchCtrl', function($scope, twitchkeeperServ
 
                 //xoffset is (starttime % 86400000) / 86400000, which makes it between 0 and 1
                 superres.data[j].xOffset = ((parseInt(Date.parse(superres.data[j].starttime) % 86400000)/86400000));
-                // console.log(superres.data[j].starttime)
+                // console.log(superres.data[j].userid);
+                // console.log(superres.data[j].starttime);
                 // console.log(superres.data[j].yOffset);
                 // console.log(superres.data[j].xOffset);
-                // console.log('done -------------------------------------------------------');
+                console.log('done -------------------------------------------------------');
             }//end for loop
 
             //put the streams into their respective channel
