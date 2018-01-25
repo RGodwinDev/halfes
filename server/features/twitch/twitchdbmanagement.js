@@ -218,17 +218,18 @@ module.exports = function(app){
       let days = 90 * day;
       let now = new Date();
       let cutoff = now - days;
-
+      console.log(cutoff);
       //remove streams over a certain age
       let j = 0;
       while(j < response.length){
         if(response[j].endtime < cutoff){ //if endtime < cutoff time, its older than 90 days
 
           let closedarr = [];
-          closedarr.push(response[j].streamid);q
+          closedarr.push(response[j].streamid);
           closedarr.push(response[j].endtime);
 
           //remove closedstream as its too old
+          //takes a stream id and end time.
           dbInstance.removeclosedstream(closedarr).then(function(){
             console.log('removed closed stream due to age');
           }).catch(function(){
@@ -273,6 +274,7 @@ module.exports = function(app){
   }//end closedStreamCull function
   closedStreamCull();
   //this only runs once, at server boot
+  
   //unless we want to set an interval
   setInterval(function(){
     closedStreamCull();
