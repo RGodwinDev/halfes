@@ -1,31 +1,40 @@
-const config = require('./server/config');
+const config = require('./server/config'); // individual server configurations and other stuff goes here.
 
-const express = require('express');
-const cors = require('cors');
-const {json} = require('body-parser');
+const express = require('express'); //framework for the server/app
+const cors = require('cors'); //https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS, basically, handles incoming requests?
+const {json} = require('body-parser'); //parse incoming requests with this
 //port, probably need to change it if im going to have it hosted elsewhere
 const port = config.port; //80 is default for most servers
-const massive = require('massive');
-const session = require('express-session');
+const massive = require('massive'); //used for db management
+const session = require('express-session'); // used for creating a session, which is mostly for the cookies?
+//cookies save serverside, while client saves the cookie/session id
+
 // const passport = require('passport');
 // const { Strategy } = require('passport-twitch');
-const masterRoutes = require('./server/masterRoutes');
+const masterRoutes = require('./server/masterRoutes'); //a file which manages all the routes, except the default one.
 const twitchdbmanage = require('./server/features/twitch/twitchdbmanagement');
 
-
-//start app
+// |||||||
+// start app
+// |||||||
 const app = express();
-//twitchkeeper db management
 //use cors and body-parser
-app.use(cors());
-app.use(json());
+app.use(cors()); //handling incoming requests
+app.use(json()); //parsing incoming request
 
 //creates a session, with info from server/config.js
 app.use(session(config.session));
 
-//when someone comes to the website, it gives them the frontend from /public
+// i'm not sure if this is actually a good idea if site gets popular
+// it serves all of the frontend files every time someone connects to the server???
+// there's like 5mb+ in there, that adds up real quick.
+// best to convert to ngnix in future
 app.use('/', express.static(__dirname + '/public'));
 
+
+// |||||||
+// database management
+// |||||||
 massive(config.postgres).then(dbInstance => {
   app.set('db', dbInstance);
   //creates tables if brand new database
@@ -37,6 +46,10 @@ massive(config.postgres).then(dbInstance => {
   twitchdbmanage(app);
 }); //end of massive function
 
+
+// |||||||
+// manages all the routes that aren't the default.
+// |||||||
 masterRoutes(app);
 
 
@@ -80,7 +93,9 @@ masterRoutes(app);
 //   cb(null, obj);
 // });
 
+// |||||||
 //listening..... on the port
+// |||||||
 app.listen(port, function(){
   console.log('listening on port ' + port)
 });
