@@ -38,4 +38,5 @@
     font-size: 10px;
     height: calc(100% + 10px);
     bottom: 110px;
+    z-index: -1;
 }
