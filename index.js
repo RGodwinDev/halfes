@@ -12,7 +12,7 @@ const session = require('express-session'); // used for creating a session, whic
 // const passport = require('passport');
 // const { Strategy } = require('passport-twitch');
 const masterRoutes = require('./server/masterRoutes'); //a file which manages all the routes, except the default one.
-const twitchdbmanage = require('./server/features/twitch/twitchdbmanagement');
+const twitchdbmanage = require('./server/features/twitch/twitchdbmanagement'); //the file that has the functions for managing the twitch db
 
 // |||||||
 // start app
