@@ -4,6 +4,10 @@ const config = require('../../config');
 module.exports = function(app){
   const dbInstance = app.get('db');
 
+  // |||||||
+  // getting a new top 25 list
+  // |||||||
+
   const getNew25List = function(){
     let promise25 = axios({
       method: 'GET',
@@ -27,6 +31,7 @@ module.exports = function(app){
         userArr.push(true);
         userArr.push(response.data.streams[i].viewers)
 
+        //get the user with _id from the db
         let userPromise = dbInstance.getUser(userArr[0]);
         userPromise.then(function(userRes){
           if(userRes.length > 0){ //if the user exists, update it with the userArr data
@@ -68,8 +73,9 @@ module.exports = function(app){
 
 
 
-
-
+  // |||||||
+  // checking if the streams are live
+  // |||||||
 
   //checking if streams are live or not----//
   //still inside massive function...
@@ -187,16 +193,17 @@ module.exports = function(app){
     })//end getTrackedUsers promise.then
   }//end of liveCheck function ------------////
 
-  liveCheck();
-  setInterval(function(){
+  liveCheck(); //run it once at server start
+  setInterval(function(){ //run it once every (interval)
     liveCheck();
   }, interval); //interval is 5 min
 
 
 
 
-
-
+  // |||||||
+  // culling dups/old (90days) streams from the db.
+  // |||||||
 
   //this is essentially 2 functions in 1 that uses the same array
   //culls extra closed streams from the db
