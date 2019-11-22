@@ -2,3 +2,4 @@ node_modules
 server/config.js
 loginserver
 loginserver.js
+server/feature/twitch/.twitchdbmanagement.js.swp
